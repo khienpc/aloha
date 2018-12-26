@@ -2,9 +2,12 @@
   {{ title }}
 </h1>
 
+<button routerLink="/menu">Menu AAA</button>
 <button routerLink="/customers">Customers</button>
 <button routerLink="/orders">Orders</button>
 <button routerLink="">Home</button>
 
 <router-outlet></router-outlet>
 
+<app-loading-screen [ngClass]="loadingScreenComponent.isLoading ? 'app-main-spinner' : ''" #appMainSpinner>
+</app-loading-screen>

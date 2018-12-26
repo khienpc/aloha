@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+
+import { LoadingScreenComponent } from './shared/loading-screen/loading-screen.component';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Welcome to aloha!';
+  @ViewChild('appMainSpinner') loadingScreenComponent: LoadingScreenComponent;
 }
