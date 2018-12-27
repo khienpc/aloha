@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+import { NotificationService } from '../../core/services/notification.service';
+
 @Component({
   selector: 'app-menu-list',
   templateUrl: './menu-list.component.html',
@@ -22,9 +24,15 @@ export class MenuListComponent implements OnInit {
     'Moccasins', 'Sneakers', 'Boots', 'Clogs', 'Loafers',
     'Moccasins', 'Sneakers'];
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(
+    private httpClient: HttpClient,
+    private notificationService: NotificationService
+  ) { }
 
   ngOnInit(): void {
-    this.httpClient.get('https://reqres.in/api/unknown').subscribe(() => {});
+    this.httpClient.get('https://reqres.in/api/users?delay=3').subscribe(
+      () => { this.notificationService.success('Success', 'See notification?'); },
+      () => { this.notificationService.error('Error', 'Not loaded data!'); }
+      );
   }
 }
