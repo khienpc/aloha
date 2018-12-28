@@ -13,7 +13,9 @@ export class LoadingScreenComponent implements OnInit, OnDestroy {
   isLoading = false;
   loadingSubscription: Subscription;
 
-  constructor(private loadingScreenService: LoadingScreenService) {
+  constructor(
+    private loadingScreenService: LoadingScreenService
+  ) {
   }
 
   ngOnInit(): void {
