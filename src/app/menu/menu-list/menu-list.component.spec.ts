@@ -4,6 +4,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { MenuListComponent } from './menu-list.component';
 import { SharedModule } from '../../shared/shared.module';
+import { SnotifyService, ToastDefaults } from 'ng-snotify';
 
 describe('MenuListComponent', () => {
   let component: MenuListComponent;
@@ -16,7 +17,16 @@ describe('MenuListComponent', () => {
         HttpClientTestingModule,
         SharedModule
       ],
-      declarations: [ MenuListComponent ]
+      declarations: [
+        MenuListComponent
+      ],
+      providers: [
+        SnotifyService,
+        {
+          provide: 'SnotifyToastConfig',
+          useValue: ToastDefaults
+        }
+      ]
     })
     .compileComponents();
   }));

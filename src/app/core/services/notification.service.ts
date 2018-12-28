@@ -1,33 +1,78 @@
 import { Injectable } from '@angular/core';
 import { SnotifyService, SnotifyPosition } from 'ng-snotify';
-import { SnotifyType } from 'ng-snotify/snotify/types/snotify.type';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotificationService {
 
-  constructor(private snotifyService: SnotifyService) {
+  constructor(
+    private snotifyService: SnotifyService
+  ) {
   }
 
-  success(title: string, body: string, position: SnotifyPosition = SnotifyPosition.rightTop, type: SnotifyType = 'success'): void {
+  success(title: string, body: string, position: SnotifyPosition = SnotifyPosition.rightTop): void {
     this.snotifyService.create({
       title: title,
       body: body,
       config: {
         position: position,
-        type: type
+        type: 'success'
       }
     });
   }
 
-  error(title: string, body: string, position: SnotifyPosition = SnotifyPosition.rightTop, type: SnotifyType = 'error'): void {
+  error(title: string, body: string, position: SnotifyPosition = SnotifyPosition.rightTop): void {
     this.snotifyService.create({
       title: title,
       body: body,
       config: {
         position: position,
-        type: type
+        type: 'error'
+      }
+    });
+  }
+
+  simple(title: string, body: string, position: SnotifyPosition = SnotifyPosition.rightTop): void {
+    this.snotifyService.create({
+      title: title,
+      body: body,
+      config: {
+        position: position,
+        type: 'simple'
+      }
+    });
+  }
+
+  warning(title: string, body: string, position: SnotifyPosition = SnotifyPosition.rightTop): void {
+    this.snotifyService.create({
+      title: title,
+      body: body,
+      config: {
+        position: position,
+        type: 'warning'
+      }
+    });
+  }
+
+  info(title: string, body: string, position: SnotifyPosition = SnotifyPosition.rightTop): void {
+    this.snotifyService.create({
+      title: title,
+      body: body,
+      config: {
+        position: position,
+        type: 'info'
+      }
+    });
+  }
+
+  confirm(title: string, body: string, position: SnotifyPosition = SnotifyPosition.rightTop): void {
+    this.snotifyService.create({
+      title: title,
+      body: body,
+      config: {
+        position: position,
+        type: 'confirm'
       }
     });
   }

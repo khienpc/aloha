@@ -43,7 +43,7 @@ module.exports = function (config) {
     concurrency: Infinity
   });
 
-  if (process.env.TRAVIS) {
+  if (process.env.TRAVIS || true) { // @todo using HeadlessChrome as default
     config.browsers = ['HeadlessChrome'];
     config.singleRun = true;
     config.browserDisconnectTimeout = 10000;
