@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { SnotifyPosition } from 'ng-snotify';
 
 import { NotificationService } from '../../core/services/notification.service';
 
@@ -9,6 +10,7 @@ import { NotificationService } from '../../core/services/notification.service';
   styleUrls: ['./menu-list.component.scss']
 })
 export class MenuListComponent implements OnInit {
+  rightUrl = 'https://reqres.in/api/users?delay=3';
   typesOfShoes: string[] = ['Boots',
     'Clogs', 'Loafers', 'Moccasins',
     'Sneakers', 'Boots', 'Clogs', 'Loafers',
@@ -30,9 +32,13 @@ export class MenuListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.httpClient.get('https://reqres.in/api/users?delay=3').subscribe(
-      () => { this.notificationService.success('Success', 'See notification?'); },
-      () => { this.notificationService.error('Error', 'Not loaded data!'); }
+    this.httpClient.get(this.rightUrl).subscribe(
+        () => {
+          this.notificationService.success('Success', 'Success notification', SnotifyPosition.centerTop);
+        },
+        () => {
+          this.notificationService.error('Error', 'Not loaded data!');
+        }
       );
   }
 }
