@@ -1,9 +1,9 @@
 import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
 
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
-import { SnotifyModule, SnotifyService, SnotifyToastConfig, ToastDefaults } from 'ng-snotify';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
