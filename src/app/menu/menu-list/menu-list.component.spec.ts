@@ -1,10 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { SnotifyService, ToastDefaults } from 'ng-snotify';
 
 import { MenuListComponent } from './menu-list.component';
 import { SharedModule } from '../../shared/shared.module';
-import { SnotifyService, ToastDefaults } from 'ng-snotify';
 
 describe('MenuListComponent', () => {
   let component: MenuListComponent;
