@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { SnotifyPosition } from 'ng-snotify';
 
 import { NotificationService } from '../../core/services/notification.service';
+import { BaseHttpClientService } from '../../core/services/base-http-client.service';
 
 @Component({
   selector: 'app-menu-list',
@@ -10,7 +10,18 @@ import { NotificationService } from '../../core/services/notification.service';
   styleUrls: ['./menu-list.component.scss']
 })
 export class MenuListComponent implements OnInit {
+  deleteUrl = 'https://reqres.in/api/users/2';
   rightUrl = 'https://reqres.in/api/users?delay=3';
+  postUrl = 'https://reqres.in/api/users';
+  putUrl = 'https://reqres.in/api/users/2';
+  newUser = {
+    'name': 'morpheus',
+    'job': 'leader'
+  };
+  updatedUser = {
+    'name': 'morpheus',
+    'job': 'zion resident'
+  };
   typesOfShoes: string[] = ['Boots',
     'Clogs', 'Loafers', 'Moccasins',
     'Sneakers', 'Boots', 'Clogs', 'Loafers',
@@ -27,12 +38,12 @@ export class MenuListComponent implements OnInit {
     'Moccasins', 'Sneakers'];
 
   constructor(
-    private httpClient: HttpClient,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private baseHttpClient: BaseHttpClientService
   ) { }
 
   ngOnInit(): void {
-    this.httpClient.get(this.rightUrl).subscribe(
+    this.baseHttpClient.get(this.rightUrl, { params: this.baseHttpClient.noLoading }).subscribe(
         () => {
           this.notificationService.success('Success', 'Success notification', SnotifyPosition.centerTop);
         },
@@ -40,5 +51,38 @@ export class MenuListComponent implements OnInit {
           this.notificationService.error('Error', 'Not loaded data!');
         }
       );
+  }
+
+  addData(): any {
+    this.baseHttpClient.post(this.postUrl, this.newUser).subscribe(
+      () => {
+        this.notificationService.success('Success', 'Added successfully!');
+      },
+      () => {
+        this.notificationService.error('Error', 'Added unsuccessfully!');
+      }
+    );
+  }
+
+  deleteData(): any {
+    this.baseHttpClient.delete(this.deleteUrl).subscribe(
+      () => {
+        this.notificationService.success('Success', 'Deleted successfully!');
+      },
+      () => {
+        this.notificationService.error('Error', 'Deleted unsuccessfully!');
+      }
+    );
+  }
+
+  updateData(): any {
+    this.baseHttpClient.put(this.putUrl, this.updatedUser, { params: this.baseHttpClient.noLoading }).subscribe(
+      () => {
+        this.notificationService.success('Success', 'Updated successfully!');
+      },
+      () => {
+        this.notificationService.error('Error', 'Updated unsuccessfully!');
+      }
+    );
   }
 }

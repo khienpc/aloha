@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 
 import { NotificationService } from '../../core/services/notification.service';
+import { BaseHttpClientService } from '../../core/services/base-http-client.service';
 
 @Component({
   selector: 'app-customer-list',
@@ -13,17 +13,16 @@ export class CustomerListComponent implements OnInit {
   errorUrl = 'https://reqres.in/api/users/23';
 
   constructor(
-    private httpClient: HttpClient,
+    private baseHttpClient: BaseHttpClientService,
     private notificationService: NotificationService
   ) { }
 
   ngOnInit(): void {
-    this.httpClient.get(this.errorUrl).subscribe(
+    this.baseHttpClient.get(this.errorUrl).subscribe(
       () => {
         this.notificationService.success('Success', 'Success notification');
       },
       () => { this.notificationService.error('Error', 'Not loaded data!'); }
     );
   }
-
 }

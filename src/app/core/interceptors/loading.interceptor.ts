@@ -29,6 +29,10 @@ export class LoadingScreenInterceptor implements HttpInterceptor {
       }
     }
 
+    if (request.params.has('noLoading')) {
+      displayLoadingScreen = false;
+    }
+
     if (displayLoadingScreen) {
       if (this.activeRequests === 0) {
         this.loadingScreenService.startLoading();
