@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { merge } from 'lodash';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BaseHttpClientService {
 
-  noLoading = new HttpParams().append('noLoading', 'active');
   constructor(
     private httpClient: HttpClient
   ) { }
 
-  get(url: string, options?: {
+  get(url: string, isLoading: boolean = true, options?: {
     headers?: HttpHeaders | {
       [header: string]: string | string[];
     };
@@ -24,10 +24,14 @@ export class BaseHttpClientService {
     responseType?: 'json';
     withCredentials?: boolean;
   }): Observable<Object> {
+    if (!isLoading) {
+      options = merge(options, { params: { noLoading: 'active' } });
+    }
+
     return this.httpClient.get(url, options);
   }
 
-  post(url: string, body: any | null, options?: {
+  post(url: string, body: any | null, isLoading: boolean = true, options?: {
     headers?: HttpHeaders | {
       [header: string]: string | string[];
     };
@@ -39,10 +43,14 @@ export class BaseHttpClientService {
     responseType?: 'json';
     withCredentials?: boolean;
   }): Observable<Object> {
+    if (!isLoading) {
+      options = merge(options, { params: { 'noLoading': 'active' } });
+    }
+
     return this.httpClient.post(url, body, options);
   }
 
-  delete(url: string, options?: {
+  delete(url: string, isLoading: boolean = true, options?: {
     headers?: HttpHeaders | {
       [header: string]: string | string[];
     };
@@ -54,10 +62,14 @@ export class BaseHttpClientService {
     responseType?: 'json';
     withCredentials?: boolean;
   }): Observable<Object> {
+    if (!isLoading) {
+      options = merge(options, { params: { 'noLoading': 'active' } });
+    }
+
     return this.httpClient.delete(url, options);
   }
 
-  put(url: string, body: any | null, options?: {
+  put(url: string, body: any | null, isLoading: boolean = true, options?: {
     headers?: HttpHeaders | {
       [header: string]: string | string[];
     };
@@ -69,6 +81,10 @@ export class BaseHttpClientService {
     responseType?: 'json';
     withCredentials?: boolean;
   }): Observable<Object> {
+    if (!isLoading) {
+      options = merge(options, { params: { 'noLoading': 'active' } });
+    }
+
     return this.httpClient.put(url, body, options);
   }
 }

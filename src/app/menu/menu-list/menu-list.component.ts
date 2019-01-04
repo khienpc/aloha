@@ -43,7 +43,7 @@ export class MenuListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.baseHttpClient.get(this.rightUrl, { params: this.baseHttpClient.noLoading }).subscribe(
+    this.baseHttpClient.get(this.rightUrl, false, { reportProgress: true }).subscribe(
         () => {
           this.notificationService.success('Success', 'Success notification', SnotifyPosition.centerTop);
         },
@@ -54,7 +54,7 @@ export class MenuListComponent implements OnInit {
   }
 
   addData(): any {
-    this.baseHttpClient.post(this.postUrl, this.newUser).subscribe(
+    this.baseHttpClient.post(this.postUrl, this.newUser, false).subscribe(
       () => {
         this.notificationService.success('Success', 'Added successfully!');
       },
@@ -76,7 +76,7 @@ export class MenuListComponent implements OnInit {
   }
 
   updateData(): any {
-    this.baseHttpClient.put(this.putUrl, this.updatedUser, { params: this.baseHttpClient.noLoading }).subscribe(
+    this.baseHttpClient.put(this.putUrl, this.updatedUser).subscribe(
       () => {
         this.notificationService.success('Success', 'Updated successfully!');
       },
