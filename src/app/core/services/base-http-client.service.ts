@@ -44,7 +44,7 @@ export class BaseHttpClientService {
     withCredentials?: boolean;
   }): Observable<Object> {
     if (!isLoading) {
-      options = merge(options, { params: { 'noLoading': 'active' } });
+      options = merge(options, { params: { noLoading: 'active' } });
     }
 
     return this.httpClient.post(url, body, options);
@@ -63,7 +63,7 @@ export class BaseHttpClientService {
     withCredentials?: boolean;
   }): Observable<Object> {
     if (!isLoading) {
-      options = merge(options, { params: { 'noLoading': 'active' } });
+      options = merge(options, { params: { noLoading: 'active' } });
     }
 
     return this.httpClient.delete(url, options);
@@ -82,7 +82,7 @@ export class BaseHttpClientService {
     withCredentials?: boolean;
   }): Observable<Object> {
     if (!isLoading) {
-      options = merge(options, { params: { 'noLoading': 'active' } });
+      options = merge(options, { params: { noLoading: 'active' } });
     }
 
     return this.httpClient.put(url, body, options);
